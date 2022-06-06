@@ -7,5 +7,5 @@ CREATE TABLE inctype (
     predicted_mobility TEXT,
     organism TEXT,
     taxid INTEGER
-)
+);
 
