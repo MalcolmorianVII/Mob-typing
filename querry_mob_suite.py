@@ -13,7 +13,7 @@ def getOne(id):
     cursor.execute(
         f"""
         SELECT * FROM inctype 
-        WHERE sample_id = {id}
+            WHERE sample_id = '{id}'
         """
     )
     result = cursor.fetchall()[0]
@@ -33,4 +33,5 @@ def subquery(col,query):
         print(row)
 
 if __name__ == "__main__":
-    getAll()
+    # getAll()
+    getOne("CP031654")
