@@ -7,5 +7,5 @@ cursor = conn.cursor()
 
 if __name__ == "__main__":
     mob_df = pd.read_csv("plasmid_mob_type.csv")
-    mob_df.to_sql(con=conn,name="inctype")
+    mob_df.to_sql(con=conn,name="inctype",if_exists="replace")
 
