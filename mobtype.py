@@ -3,9 +3,12 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField,SubmitField
 from wtforms.validators import DataRequired
+import os
 
 app = Flask(__name__)
+SECRET_KEY = os.urandom(32)
 
+app.config['SECRET_KEY'] = SECRET_KEY
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///plasmid.db"
 
 db = SQLAlchemy(app)
@@ -26,7 +29,7 @@ def home():
     form = queryForm()
     if form.validate_on_submit():
         plasmid = Inctype.query.filter_by(sample_id=form.sample_id.data).first()
-    return render_template("home.html",plasmid=plasmid)
-
+        return render_template("home.html",plasmid=plasmid)
+    return render_template("home.html",plasmid='',form=form)
 if __name__ == "__main__":
     app.run(debug=True) 
