@@ -1,3 +1,4 @@
 *.csv
 *.db
 mob
+__pycache__*
