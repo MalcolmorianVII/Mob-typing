@@ -11,11 +11,21 @@
     <main>
         <h1>Find the incType of your plasmid</h1>
         <p>Mobsite helps you to find the incompatibility type of your plasmid.To get started enter the id of your sample below</p>
-        <form action="">
+        <!-- <form action="">
             <label for="query">Search</label>
             <input type="text" id="query">
         </form>
-        <input type="submit">
+        <input type="submit"> -->
+        <div>
+            <h1>{{ plasmid.sample_id }}</h1>
+            <ul>
+                <li>{{ plasmid.rep_type }}</li>
+                <li>{{ plasmid.rep_type_accession }}</li>
+                <li>{{ plasmid.predicted_mobility }}</li>
+                <li>{{ plasmid.organism }}</li>
+                <li>{{ plasmid.taxid }}</li>
+            </ul>
+        </div>
     </main>
     
 </body>
