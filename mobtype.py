@@ -1,3 +1,4 @@
+from crypt import methods
 from flask import Flask,render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
@@ -25,11 +26,12 @@ class queryForm(FlaskForm):
     search = StringField('Search',validators=[DataRequired("Enter organism id please!")])
     submit = SubmitField('Submit')
 
-@app.route("/")
+@app.route("/",methods=['GET','POST'])
 def home():
     form = queryForm()
     if form.validate_on_submit():
-        plasmid = Inctype.query.filter_by(sample_id=form.sample_id.data).first()
+        # print(form.search.data)
+        plasmid = Inctype.query.filter_by(sample_id=form.search.data).first()
         return render_template("home.html",plasmid=plasmid)
     return render_template("home.html",plasmid='',form=form)
 if __name__ == "__main__":
