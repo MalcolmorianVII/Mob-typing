@@ -13,27 +13,9 @@
     <main>
         <h1>Find the incType of your plasmid</h1>
         <p>Mobsite helps you to find the incompatibility type of your plasmid.To get started enter the id of your sample below</p>
-        <form action="" method="post" enctype="multipart/form-data">
-                <fieldset class="form-group">
-                    <div class="form-group">
-                        {{ form.search.label(class="form-control-label") }}
-
-                        {% if form.search.errors %}
-                            {{ form.search(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.search.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form.search(class="form-control form-control-lg") }}
-                        {% endif %}
-                    </div>
-                </fieldset>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
-            </div>
-        </form>
+        {% for q in querries %}
+            
+        {% endfor %}
     </main>
     
 </body>
