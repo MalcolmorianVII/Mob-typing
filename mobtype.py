@@ -1,5 +1,5 @@
 from crypt import methods
-from flask import Flask,render_template
+from flask import Flask, redirect,render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField,SubmitField
@@ -28,15 +28,30 @@ class queryForm(FlaskForm):
 
 @app.route("/",methods=['GET','POST'])
 def home():
-    return render_template("home.html")
-
-@app.route('/querry')
-def get_inctype():
     form = queryForm()
     if form.validate_on_submit():
         # print(form.search.data)
         plasmid = Inctype.query.filter_by(sample_id=form.search.data).first()
         if plasmid:
-            return render_template("result.html",plasmid=plasmid)
+            return redirect("result.html",plasmid=plasmid)
+    return render_template("home.html",form=form)
+
+@app.route("/querry",methods=['GET','POST'])
+def get_querry():
+    form = queryForm()
+    if form.validate_on_submit():
+        # print(form.search.data)
+        plasmid = Inctype.query.filter_by(sample_id=form.search.data).first()
+        if plasmid:
+            return redirect("result.html",plasmid=plasmid)
+    return render_template("home.html",form=form)
+# @app.route('/querry',methods=['GET','POST'])
+# def get_inctype():
+#     form = queryForm()
+#     if form.validate_on_submit():
+#         # print(form.search.data)
+#         plasmid = Inctype.query.filter_by(sample_id=form.search.data).first()
+#         if plasmid:
+#             return render_template("result.html",plasmid=plasmid)
 if __name__ == "__main__":
     app.run(debug=True) 
