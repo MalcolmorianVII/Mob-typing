@@ -15,7 +15,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///plasmid.db"
 db = SQLAlchemy(app)
 
 class Inctype(db.Model):
-    sample_id = db.Column(db.String(30),primary_key=True)
+    sample_id = db.Column(db.String(60),primary_key=True)
     rep_type = db.Column(db.String(60),nullable=True)
     rep_type_accession = db.Column(db.String(60),nullable=True)
     predicted_mobility = db.Column(db.String(60),nullable=False)
@@ -28,11 +28,15 @@ class queryForm(FlaskForm):
 
 @app.route("/",methods=['GET','POST'])
 def home():
+    return render_template("home.html")
+
+@app.route('/querry')
+def get_inctype():
     form = queryForm()
     if form.validate_on_submit():
         # print(form.search.data)
         plasmid = Inctype.query.filter_by(sample_id=form.search.data).first()
-        return render_template("home.html",plasmid=plasmid)
-    return render_template("home.html",plasmid='',form=form)
+        if plasmid:
+            return render_template("result.html",plasmid=plasmid)
 if __name__ == "__main__":
     app.run(debug=True) 
