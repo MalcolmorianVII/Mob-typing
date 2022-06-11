@@ -23,6 +23,7 @@ class Inctype(db.Model):
 
 class queryForm(FlaskForm):
     search = StringField('Search',validators=[DataRequired("Enter organism id please!")])
+    submit = SubmitField('Submit')
 
 @app.route("/")
 def home():
